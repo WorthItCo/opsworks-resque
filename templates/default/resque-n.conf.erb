@@ -7,6 +7,7 @@ stop on stopping resque-<%= @application %>
 env QUEUE=<%= @queue %>
 env RACK_ENV=<%= @rack_env %>
 env TERM_CHILD=1
+env NEW_RELIC_DISABLE_MIDDLEWARE_INSTRUMENTATION=true
 
 chdir <%= @deploy[:deploy_to] %>/current
 
