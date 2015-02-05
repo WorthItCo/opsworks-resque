@@ -25,7 +25,7 @@ node[:deploy].each do |application, deploy|
     quantity.times do |idx|
       idx = idx + 1 # make index 1-based
       Chef::Log.info("Worker #{idx} for #{queue}")
-      template "/etc/init/resque-#{application}-#{idx}.conf" do
+      template "/etc/init/resque-#{application}-#{queue}-#{idx}.conf" do
         source "resque-n.conf.erb"
         mode '0644'
         variables application: application, rack_env: rack_env, deploy: deploy, queue: queue, instance: idx
