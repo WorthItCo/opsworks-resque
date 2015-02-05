@@ -21,9 +21,10 @@ node[:deploy].each do |application, deploy|
   # configure rails_env in case of non-rails app
   rack_env = deploy[:rails_env] || settings[:rack_env] || settings[:rails_env]
   settings[:workers].each do |queue, quantity|
-
+    Chef::Log.info("Creating workers for #{queue}")
     quantity.times do |idx|
       idx = idx + 1 # make index 1-based
+      Chef::Log.info("Worker #{idx} for #{queue}")
       template "/etc/init/resque-#{application}-#{idx}.conf" do
         source "resque-n.conf.erb"
         mode '0644'
